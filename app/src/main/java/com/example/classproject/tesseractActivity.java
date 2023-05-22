@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
@@ -38,8 +39,24 @@ public class tesseractActivity extends AppCompatActivity {
 
         // 트레이닝 데이터가 카피되어있는지 체크
         checkFile(new File(datapath + "tessdata/"));
-    }
 
+        // Tesseract API 언어 세팅
+        String lang ="eng";
+
+        // OCR 세팅
+        mTess = new TessBaseAPI();
+        mTess.init(datapath, lang);
+
+    }
+    
+    // 이미지에서 텍스트 읽기
+    public void processImage(View view) {
+        String OCRresult = null;
+        mTess.setImage(image);
+        OCRresult = mTess.getUTF8Text();
+
+        OCRTextView.setText(OCRresult);
+    }
 
 
     private void checkFile(File dir) {

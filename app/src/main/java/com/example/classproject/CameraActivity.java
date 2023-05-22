@@ -58,6 +58,15 @@ public class CameraActivity extends AppCompatActivity {
                 takePhoto();
             }
         });
+
+        Button btnNext = findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CameraActivity.this, tesseractActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // 카메라 권한이 있는지 확인합니다.

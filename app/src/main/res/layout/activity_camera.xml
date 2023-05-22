@@ -16,4 +16,12 @@
         android:text="사진촬영"
         android:background="#708090"/>
 
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다음 화면으로"
+        />
+
+
 </LinearLayout>

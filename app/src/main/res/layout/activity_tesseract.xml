@@ -12,11 +12,12 @@
         android:background="#ffffff"
         android:id="@+id/ImageContainer">
 
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
-            android:src="@drawable/sample_eng"/>
+            android:src="@drawable/sample_kor"/>
 
     </RelativeLayout>
 
@@ -25,20 +26,18 @@
         android:layout_height="48dp"
         android:layout_below="@id/ImageContainer"
         android:clickable="true"
-        android:onClick="processImage"
         android:background="#166e78"
         android:id="@+id/OCRButtonContainer">
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RUN OCR"
             android:textSize= "18dp"
             android:textColor="#ffffff"
+            android:id="@+id/ocrButton"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:clickable="true"
-            android:onClick="processImage"/>
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 

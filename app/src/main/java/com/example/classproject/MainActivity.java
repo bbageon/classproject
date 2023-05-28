@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,20 +29,28 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         // 데이터베이스에 새로운 데이터 삽입 예시
-        dbHelper.InsertInventory(1, "음료수", 10);
-        dbHelper.InsertInventory(2, "과자", 15);
+        dbHelper.InsertInventory(7, "음료수", 15);
+        dbHelper.InsertInventory(8, "과자", 20);
 
-        dbHelper.UpdateInventory(1, "환타", 15);
-        dbHelper.UpdateInventory(2, "맛동산", 20);
+        dbHelper.UpdateInventory(7, "환타", 20);
+        dbHelper.UpdateInventory(8, "맛동산", 25);
 
-        dbHelper.DeleteInventory(1);
+        // dbHelper.DeleteInventory(1);
 
         updateTable();
     }
     private void updateTable() {
-
         // DB에서 모든 상품 정보 가져오기
         ArrayList<InventoryItem> inventoryItems = dbHelper.getInventoryItems();
+
+        // "상품번호"를 기준으로 내림차순 정렬
+        Collections.sort(inventoryItems, new Comparator<InventoryItem>() {
+            @Override
+            public int compare(InventoryItem item1, InventoryItem item2) {
+                // item1과 item2의 "상품번호"를 비교하여 내림차순으로 정렬
+                return Integer.compare(item1.getId(), item2.getId());
+            }
+        });
 
         // 각각의 상품 정보에 대해 TableRow을 생성하여 표에 추가
         for (InventoryItem item : inventoryItems) {

@@ -19,6 +19,7 @@ public class calendar_t extends AppCompatActivity {
     private LinearLayout textBoxLayout;
     private Button submitButton;
     private Button resetButton;
+    private Button next2Button;
 
     private String selectedDate;
     private CalendarView calendarView;
@@ -36,12 +37,22 @@ public class calendar_t extends AppCompatActivity {
         submitButton = findViewById(R.id.submitButton);
         resetButton = findViewById(R.id.resetButton);
         calendarView = findViewById(R.id.calendarView1);
+        next2Button = findViewById(R.id.next2Button);
+
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 // 월은 0부터 시작하므로 1을 더해줍니다.
                 selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth);
+            }
+        });
+
+        next2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(calendar_t.this, CameraActivity.class);
+                startActivity(intent);
             }
         });
 

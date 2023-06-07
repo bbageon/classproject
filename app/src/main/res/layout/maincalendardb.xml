@@ -7,12 +7,14 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <!--캘린더-->
     <CalendarView
         android:id="@+id/calendarView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp" />
 
+    <!--상품명, 재고량 텍스트 박스에 표시-->
     <ScrollView
         android:id="@+id/textBoxContainer"
         android:layout_width="match_parent"
@@ -31,11 +33,13 @@
 
     </ScrollView>
 
+    <!--1 행 버튼 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!--날짜 선택 : 해당 날짜 품목 표시-->
         <Button
             android:id="@+id/submitButton"
             android:layout_width="0dp"
@@ -45,6 +49,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"/>
 
+        <!--현재 품목 : 전체 품목 표시-->
         <Button
             android:id="@+id/resetButton"
             android:layout_width="0dp"
@@ -56,11 +61,13 @@
 
     </LinearLayout>
 
+    <!--2행 버튼 레이아웃-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!--미구현-->
         <Button
             android:id="@+id/next1Button"
             android:layout_width="0dp"
@@ -69,6 +76,7 @@
             android:text="판매량 추가"
             android:layout_marginTop="16dp" />
 
+        <!--카메라 연결-->
         <Button
             android:id="@+id/next2Button"
             android:layout_width="0dp"

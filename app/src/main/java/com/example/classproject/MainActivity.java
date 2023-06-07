@@ -1,16 +1,21 @@
 package com.example.classproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
 
     private Button backBtn;
+    private Button deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +38,47 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         backBtn = findViewById(R.id.btn_main);
+        deleteBtn = findViewById(R.id.btn_delete);
         backBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, calendar_t.class);
                 startActivity(intent);
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 팝업창을 띄우고 ID 값을 입력 받음
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("삭제");
+                builder.setMessage("삭제할 상품의 ID를 입력하세요:");
+
+                final EditText input = new EditText(MainActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setView(input);
+
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int id = Integer.parseInt(input.getText().toString());
+                        DBHelper dbHelper = new DBHelper(MainActivity.this);
+                        dbHelper.DeleteInventory(id);
+                        // 삭제 완료 후 필요한 작업 수행
+
+                        // 예를 들어, 데이터 삭제 후 화면을 갱신하거나 메시지를 표시
+                        Toast.makeText(MainActivity.this, "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
             }
         });
 
@@ -66,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.InsertInventoryForDate(MainActivity.this, 22, "파채", 110, "2023-06-01");
         dbHelper.InsertInventoryForDate(MainActivity.this, 23, "명이나물", 120, "2023-06-01");*/
 
-        /*dbHelper.DeleteInventory(17);
+        dbHelper.DeleteInventory(17);
         dbHelper.DeleteInventory(18);
         dbHelper.DeleteInventory(19);
         dbHelper.DeleteInventory(20);
         dbHelper.DeleteInventory(21);
         dbHelper.DeleteInventory(22);
-        dbHelper.DeleteInventory(23);*/
+        dbHelper.DeleteInventory(23);
 
         updateTable();
     }

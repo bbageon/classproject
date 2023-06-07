@@ -8,23 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="#ffffff"
-        android:id="@+id/ImageContainer">
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView"
-            android:src="@drawable/video_receipt1"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@id/ImageContainer"
         android:clickable="true"
         android:background="#166e78"
         android:id="@+id/OCRButtonContainer">
@@ -37,6 +21,20 @@
             android:textColor="#ffffff"
             android:id="@+id/ocrButton"
             android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼"
+            android:id="@+id/bottomButton"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

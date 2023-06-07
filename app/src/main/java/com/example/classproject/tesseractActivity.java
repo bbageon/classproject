@@ -2,6 +2,7 @@ package com.example.classproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.googlecode.tesseract.android.TessBaseAPI;
+/*import com.googlecode.tesseract.android.TessBaseAPI;*/
 
 import org.w3c.dom.Text;
 
@@ -26,7 +27,7 @@ import java.io.OutputStream;
 public class tesseractActivity extends AppCompatActivity {
 
     Bitmap image; //사용되는이미지
-    private TessBaseAPI mTess;  //Tess API 참조
+    /*private TessBaseAPI mTess;*/  //Tess API 참조
     String datapath =""; // 언어데이터 경로
     TextView OCRTextView; // OCR 결과뷰
     Button btn_ocr;
@@ -40,7 +41,7 @@ public class tesseractActivity extends AppCompatActivity {
         btn_ocr = findViewById(R.id.ocrButton);
 
         // 이미지 디코딩을 위한 초기화(Resource 폴더에 저장한 샘플 그림파일을 bitmap 으로 만들어 리턴)
-        image = BitmapFactory.decodeResource(getResources(), R.drawable.sample_kor);
+        /*image = BitmapFactory.decodeResource(getResources(), R.drawable.sample_kor);*/
 
         // 언어파일 경로, getfilesdir() : 일반 파일들의 저장 경로 반환
         datapath = getFilesDir()+ "/tesseract/";
@@ -54,11 +55,11 @@ public class tesseractActivity extends AppCompatActivity {
         String lang = "kor+eng";
 
         // OCR 세팅
-        mTess = new TessBaseAPI();
-        mTess.init(datapath, lang);
+        /*mTess = new TessBaseAPI();
+        mTess.init(datapath, lang);*/
 
         //텍스트 추출 버튼
-        btn_ocr.setOnClickListener(new View.OnClickListener() {
+        /*btn_ocr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 이미지를 가져와 비트맵으로 변환
@@ -73,7 +74,7 @@ public class tesseractActivity extends AppCompatActivity {
                 TextView OCRTextView = (TextView) findViewById(R.id.OCRTextView);
                 OCRTextView.setText(OCRResult);
             }
-        });
+        });*/
 
     }
 

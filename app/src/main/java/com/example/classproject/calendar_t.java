@@ -24,9 +24,6 @@ public class calendar_t extends AppCompatActivity {
     private String selectedDate;
     private CalendarView calendarView;
 
-    // TextView에서 재고량을 일정한 간격으로 맞추기 위한 상수
-    private static final int STOCK_WIDTH = 10;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,4 +1,5 @@
 package com.example.classproject;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -62,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Inventory ORDER BY stock DESC", null); // 재고량 내림차순
+        Cursor cursor = db.rawQuery("SELECT * FROM Inventory ORDER BY stock ASC", null); // 재고량 내림차순
         if(cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
@@ -87,11 +88,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return inventoryItems;
     }
 
-    // INSERT문
-    public void InsertInventory(int id, String name, int quantity) {
+    public void InsertInventory(Context context, int id, String name, int quantity) {
         SQLiteDatabase db = getWritableDatabase();
-        // 날짜
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        /*// ID 중복 시 재확인 (팝업창)
+        InventoryItem existingItem = getInventoryItemById(id);
+        if (existingItem != null) {
+            showAlertDialog(context, "이미 존재하는 ID의 상품이 있습니다.");
+            return;
+        }*/
+
+        // 데이터를 입력한 날짜가 들어가
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(new Date());
 
         Random random = new Random();
@@ -103,25 +111,50 @@ public class DBHelper extends SQLiteOpenHelper {
                 new Object[]{id, name, quantity, sales, stock, date});
     }
 
+    // 원하는 날짜에 데이터를 INSERT
+    public void InsertInventoryForDate(Context context, int id, String name, int quantity, String desiredDate) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        /*// ID 중복 시 재확인 (팝업창)
+        InventoryItem existingItem = getInventoryItemById(id);
+        if (existingItem != null) {
+            showAlertDialog(context, "이미 존재하는 ID의 상품이 있습니다.");
+            return;
+        }*/
+
+        Random random = new Random();
+        // 0 <= 판매량(랜덤값) <= 수량
+        int sales = random.nextInt( quantity + 1);
+        int stock = quantity - sales;
+
+        db.execSQL("INSERT INTO Inventory (id, name, quantity, sales, stock, date) VALUES (?, ?, ?, ?, ?, ?)",
+                new Object[]{id, name, quantity, sales, stock, desiredDate});
+    }
+
     // UPDATE문
     // random 함수를 이용해 sales (0 <= sales <= quantity)에 랜덤값 대입
     public void UpdateInventory(int id, String name, int additionalQuantity) {
         SQLiteDatabase db = getWritableDatabase();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(new Date());
 
-        int previousQuantity = getInventoryItemById(id).getQuantity(); // 이전 수량
-        int quantity = previousQuantity + additionalQuantity; // 이전 수량 + 이후 수량
+        InventoryItem existingItem = getInventoryItemById(id);
+        if (existingItem != null) {
+            int previousQuantity = existingItem.getQuantity(); // 이전 수량
+            int previousSales = existingItem.getSales(); // 이전 판매량
+            int quantity = previousQuantity + additionalQuantity; // 이전 수량 + 추가 수량
 
-        Random random = new Random();
-        // 이전 수량 <= 판매량(랜덤값) <= 이후 수량
-        int minBound = Math.max(0, additionalQuantity - previousQuantity + 1);
-        int sales = previousQuantity + random.nextInt(minBound);
-        int stock = quantity - sales;
+            // 이전 판매량 <= 판매량(랜덤값) <= 이후 수량
+            Random random = new Random();
+            int minSales = previousSales + 1;
+            int maxSales = quantity - 1; // 최소값
+            int sales = random.nextInt(maxSales - minSales +1) + minSales; // 판매량 업데이트
+            int stock = quantity - sales; // 재고량 계산
 
-        db.execSQL("UPDATE Inventory Set name=?, quantity=?, sales=?, stock=?, date=? WHERE id=?",
-                new Object[]{name, quantity, sales, stock, date, id});
+            db.execSQL("UPDATE Inventory SET name=?, quantity=?, sales=?, stock=?, date=? WHERE id=?",
+                    new Object[]{name, quantity, sales, stock, date, id});
+        }
     }
 
     // DELETE문
@@ -129,5 +162,31 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM Inventory WHERE id=?",
                 new Object[]{id});
+    }
+
+    /*// ID가 겹치면 경고문
+    private void showAlertDialog(Context context, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message).setPositiveButton("확인", null).show();
+    }*/
+
+    // "날짜 선택" 버튼 누르면 해당하는 날짜의 데이터들을 보여줌
+    public ArrayList<String> getOrderItemsByDate(String date) {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<String> orderItems = new ArrayList<>();
+
+        // 선택한 날짜에 해당하는 데이터를 검색함
+        Cursor cursor = db.rawQuery("SELECT * FROM Inventory WHERE date = ? AND STOCK <= 10 ORDER BY stock ASC", new String[]{date});
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                int stock = cursor.getInt(cursor.getColumnIndexOrThrow("stock"));
+                String item = "상품명 : " + name + " - "+ " 재고량 : " + stock + " 개";
+                orderItems.add(item);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return orderItems;
     }
 }

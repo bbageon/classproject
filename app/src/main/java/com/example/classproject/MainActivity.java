@@ -3,8 +3,11 @@ package com.example.classproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private DBHelper dbHelper;
 
+    private Button backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,21 +31,86 @@ public class MainActivity extends AppCompatActivity {
         tableLayout = findViewById(R.id.tableLayout);
         dbHelper = new DBHelper(this);
 
+        backBtn = findViewById(R.id.btn_main);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, calendar_t.class);
+                startActivity(intent);
+            }
+        });
+
         // 데이터베이스에 새로운 데이터 삽입 예시
-        dbHelper.InsertInventory(1, "음료수", 10);
-        dbHelper.InsertInventory(2, "과자", 15);
+        /*dbHelper.InsertInventory(MainActivity.this, 1, "청량고추", 50);
+        dbHelper.InsertInventory(MainActivity.this, 2, "테이팩스니트릴장갑", 100);
+        dbHelper.InsertInventory(MainActivity.this,3,"참맛기름", 150);
+        dbHelper.InsertInventory(MainActivity.this,4,"사시미간장", 200);
+        dbHelper.InsertInventory(MainActivity.this,5,"쌈무", 250);
+        dbHelper.InsertInventory(MainActivity.this,6,"일등맛김치", 300);
+        dbHelper.InsertInventory(MainActivity.this,7,"쫄면", 350);
+        dbHelper.InsertInventory(MainActivity.this,8,"구이용콩나물", 400);
+        dbHelper.InsertInventory(MainActivity.this,9,"일회용성인용앞치마", 450);
+        dbHelper.InsertInventory(MainActivity.this,10,"양파", 500);
 
-        dbHelper.UpdateInventory(1, "환타", 15);
-        dbHelper.UpdateInventory(2, "맛동산", 20);
+        dbHelper.InsertInventoryForDate(MainActivity.this, 11, "test1", 10, "2023-06-05");*/
+        /*dbHelper.InsertInventoryForDate(MainActivity.this, 12, "소단단두부", 10, "2023-06-05");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 13, "하늘그린 큐티물티", 20, "2023-06-05");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 14, "다진마늘", 30, "2023-06-05");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 15, "다목적수세미", 40, "2023-06-05");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 16, "키친아트철수세미", 50, "2023-06-05");*/
 
-        dbHelper.DeleteInventory(1);
+        /*dbHelper.InsertInventoryForDate(MainActivity.this, 17, "만능김가루", 60, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 18, "깐마늘", 70, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 19, "도깨비폼", 80, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 20, "크린장갑", 90, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 21, "참기름", 100, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 22, "파채", 110, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 23, "명이나물", 120, "2023-06-01");*/
+
+        /*dbHelper.DeleteInventory(17);
+        dbHelper.DeleteInventory(18);
+        dbHelper.DeleteInventory(19);
+        dbHelper.DeleteInventory(20);
+        dbHelper.DeleteInventory(21);
+        dbHelper.DeleteInventory(22);
+        dbHelper.DeleteInventory(23);*/
 
         updateTable();
     }
     private void updateTable() {
+        // 기존에 표시되던 데이터 삭제
+        tableLayout.removeAllViews();
 
         // DB에서 모든 상품 정보 가져오기
         ArrayList<InventoryItem> inventoryItems = dbHelper.getInventoryItems();
+
+        // 테이블의 첫 번째 행은 열의 제목을 나타냄
+        TableRow headerRow = new TableRow(this);
+
+        TextView headerId = new TextView(this);
+        headerId.setText("상품번호");
+        headerRow.addView(headerId);
+
+        TextView headerName = new TextView(this);
+        headerName.setText("상품명");
+        headerRow.addView(headerName);
+
+        TextView headerQuantity = new TextView(this);
+        headerQuantity.setText("수량");
+        headerRow.addView(headerQuantity);
+
+        TextView headerSales = new TextView(this);
+        headerSales.setText("판매량");
+        headerRow.addView(headerSales);
+
+        TextView headerStock = new TextView(this);
+        headerStock.setText("재고량");
+        headerRow.addView(headerStock);
+
+        TextView headerDate = new TextView(this);
+        headerDate.setText("날짜");
+        headerRow.addView(headerDate);
+
+        tableLayout.addView(headerRow);
 
         // 각각의 상품 정보에 대해 TableRow을 생성하여 표에 추가
         for (InventoryItem item : inventoryItems) {

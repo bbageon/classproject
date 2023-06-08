@@ -1,6 +1,7 @@
 package com.example.classproject;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.graphics.drawable.ColorDrawable;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +37,7 @@ public class CameraActivity extends AppCompatActivity {
     private Button btn_photo;
     private ImageView iv_photo;
     private Uri imageUri;
-
+    ProgressDialog customProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,23 @@ public class CameraActivity extends AppCompatActivity {
 
         iv_photo = findViewById(R.id.iv_photo);
         btn_photo = findViewById(R.id.btn_photo);
+
+        Button btnLoad = findViewById(R.id.btnNext);
+
+        //로딩창 객체 생성
+        customProgressDialog = new ProgressDialog(this);
+        //로딩창을 투명하게
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        btnLoad.setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // 로딩창 보여주기
+                customProgressDialog.show();
+            }
+        });
 
         // 카메라 및 외부 저장소에 대한 권한을 확인합니다.
         if (hasCameraPermission() && hasWriteExternalStoragePermission()) {
@@ -59,7 +78,7 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        Button btnNext = findViewById(R.id.btnNext);
+        Button btnNext = findViewById(R.id.btnload);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

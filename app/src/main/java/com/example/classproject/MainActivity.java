@@ -94,14 +94,14 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.InsertInventory(MainActivity.this,9,"일회용성인용앞치마", 450);
         dbHelper.InsertInventory(MainActivity.this,10,"양파", 500);
 
-        dbHelper.InsertInventoryForDate(MainActivity.this, 11, "test1", 10, "2023-06-05");*/
-        /*dbHelper.InsertInventoryForDate(MainActivity.this, 12, "소단단두부", 10, "2023-06-05");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 11, "test1", 10, "2023-06-05");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 12, "소단단두부", 10, "2023-06-05");
         dbHelper.InsertInventoryForDate(MainActivity.this, 13, "하늘그린 큐티물티", 20, "2023-06-05");
         dbHelper.InsertInventoryForDate(MainActivity.this, 14, "다진마늘", 30, "2023-06-05");
         dbHelper.InsertInventoryForDate(MainActivity.this, 15, "다목적수세미", 40, "2023-06-05");
-        dbHelper.InsertInventoryForDate(MainActivity.this, 16, "키친아트철수세미", 50, "2023-06-05");*/
+        dbHelper.InsertInventoryForDate(MainActivity.this, 16, "키친아트철수세미", 50, "2023-06-05");
 
-        /*dbHelper.InsertInventoryForDate(MainActivity.this, 17, "만능김가루", 60, "2023-06-01");
+        dbHelper.InsertInventoryForDate(MainActivity.this, 17, "만능김가루", 60, "2023-06-01");
         dbHelper.InsertInventoryForDate(MainActivity.this, 18, "깐마늘", 70, "2023-06-01");
         dbHelper.InsertInventoryForDate(MainActivity.this, 19, "도깨비폼", 80, "2023-06-01");
         dbHelper.InsertInventoryForDate(MainActivity.this, 20, "크린장갑", 90, "2023-06-01");
@@ -109,13 +109,30 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.InsertInventoryForDate(MainActivity.this, 22, "파채", 110, "2023-06-01");
         dbHelper.InsertInventoryForDate(MainActivity.this, 23, "명이나물", 120, "2023-06-01");*/
 
+        /*dbHelper.DeleteInventory(1);
+        dbHelper.DeleteInventory(2);
+        dbHelper.DeleteInventory(3);
+        dbHelper.DeleteInventory(4);
+        dbHelper.DeleteInventory(5);
+        dbHelper.DeleteInventory(6);
+        dbHelper.DeleteInventory(7);
+        dbHelper.DeleteInventory(8);
+        dbHelper.DeleteInventory(9);
+        dbHelper.DeleteInventory(10);
+        dbHelper.DeleteInventory(11);
+        dbHelper.DeleteInventory(12);
+        dbHelper.DeleteInventory(13);
+        dbHelper.DeleteInventory(14);
+        dbHelper.DeleteInventory(15);
+        dbHelper.DeleteInventory(16);
         dbHelper.DeleteInventory(17);
         dbHelper.DeleteInventory(18);
         dbHelper.DeleteInventory(19);
         dbHelper.DeleteInventory(20);
         dbHelper.DeleteInventory(21);
         dbHelper.DeleteInventory(22);
-        dbHelper.DeleteInventory(23);
+        dbHelper.DeleteInventory(23);*/
+
 
         updateTable();
     }

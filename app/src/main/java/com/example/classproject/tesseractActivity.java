@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Intent;
 
 /*import com.googlecode.tesseract.android.TessBaseAPI;*/
 
@@ -31,6 +32,8 @@ public class tesseractActivity extends AppCompatActivity {
     String datapath =""; // 언어데이터 경로
     TextView OCRTextView; // OCR 결과뷰
     Button btn_ocr;
+    private Button bottomButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,16 @@ public class tesseractActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tesseract);
 
         OCRTextView = findViewById(R.id.OCRTextView);
-        btn_ocr = findViewById(R.id.ocrButton);
+        bottomButton = findViewById(R.id.bottomButton);
+//        btn_ocr = findViewById(R.id.ocrButton);
+
+        bottomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(tesseractActivity.this, calendar_t.class);
+                startActivity(intent);
+            }
+        });
 
         // 이미지 디코딩을 위한 초기화(Resource 폴더에 저장한 샘플 그림파일을 bitmap 으로 만들어 리턴)
         /*image = BitmapFactory.decodeResource(getResources(), R.drawable.sample_kor);*/

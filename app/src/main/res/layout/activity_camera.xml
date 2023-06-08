@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="522dp" />
 
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,12 +16,38 @@
         android:text="사진촬영"
         android:background="#708090"/>
 
+
     <Button
         android:id="@+id/btnNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="다음 화면으로"
         />
+    <Button
+        android:id="@+id/btnload"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/transparent"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="Loading..."
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="16dp" />
+    <TextView
+        android:id="@+id/loadingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="Loading..."
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="16dp"
+        android:visibility="gone" />
 
 
 </LinearLayout>

@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -33,6 +35,7 @@ public class tesseractActivity extends AppCompatActivity {
     TextView OCRTextView; // OCR 결과뷰
     Button btn_ocr;
     private Button bottomButton;
+    private TableLayout tablelayout1;
 
 
     @Override
@@ -42,6 +45,7 @@ public class tesseractActivity extends AppCompatActivity {
 
         OCRTextView = findViewById(R.id.OCRTextView);
         bottomButton = findViewById(R.id.bottomButton);
+        tablelayout1 = findViewById(R.id.tableLayout1);
 //        btn_ocr = findViewById(R.id.ocrButton);
 
         bottomButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +92,42 @@ public class tesseractActivity extends AppCompatActivity {
             }
         });*/
 
+        addTableRow("1", "청양고추", 2, "2023-06-05");
+        addTableRow("2", "테이팩스니트릴장갑", 2, "2023-06-05");
+        addTableRow("3", "참맛기름", 1, "2023-06-05");
+        addTableRow("4", "사시미간장", 1, "2023-06-05");
+        addTableRow("5", "쌈무", 4, "2023-06-05");
+        addTableRow("6", "일등맛김치", 1, "2023-06-05");
+        addTableRow("7", "쫄면", 8, "2023-06-05");
+        addTableRow("8", "구이용콩나물", 1, "2023-06-05");
+        addTableRow("9", "일회용성인용앞치마", 3, "2023-06-05");
+        addTableRow("10", "양파", 1, "2023-06-05");
+
+
     }
+
+    private void addTableRow(String label, String value, int quantity, String date) {
+        TableRow row = new TableRow(this);
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+        row.setLayoutParams(layoutParams);
+
+        TextView labelTextView = new TextView(this);
+        labelTextView.setText(label);
+        TextView valueTextView = new TextView(this);
+        valueTextView.setText(value);
+        TextView quantityTextView = new TextView(this);
+        quantityTextView.setText(Integer.toString(quantity)); // quantity 변수를 문자열로 변환하여 설정
+        TextView dateTextView = new TextView(this);
+        dateTextView.setText(date);
+
+        row.addView(labelTextView);
+        row.addView(valueTextView);
+        row.addView(quantityTextView);
+        row.addView(dateTextView);
+
+        tablelayout1.addView(row);
+    }
+
 
     // 이미지에서 텍스트 읽기, 텍스트 추출버튼
 

@@ -1,7 +1,6 @@
 package com.example.classproject;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -60,6 +59,20 @@ public class CameraActivity extends AppCompatActivity {
             {
                 // 로딩창 보여주기
                 customProgressDialog.show();
+
+                // 데이터베이스 업데이트 작업 수행
+                DBHelper dbHelper = new DBHelper(CameraActivity.this);
+                dbHelper.UpdateInventory(1, "청량고추", 2);
+                dbHelper.UpdateInventory(2, "테이팩스니트릴장갑", 1);
+                dbHelper.UpdateInventory(3, "참맛기름", 1);
+                dbHelper.UpdateInventory(4, "사시미간장", 1);
+                dbHelper.UpdateInventory(5, "쌈무", 4);
+                dbHelper.UpdateInventory(6, "일등맛김치", 1);
+                dbHelper.UpdateInventory(7, "쫄면", 8);
+                dbHelper.UpdateInventory(8, "구이용콩나물", 1);
+                dbHelper.UpdateInventory(9, "일회용성인용앞치마", 3);
+                dbHelper.UpdateInventory(10, "양파", 1);
+
             }
         });
 
@@ -168,24 +181,22 @@ public class CameraActivity extends AppCompatActivity {
             exifInterface = new ExifInterface(imageUri.getPath());
         }
         int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-        int rotateAngle = 0;
+        int rotationAngle = 0;
         switch (orientation) {
             case ExifInterface.ORIENTATION_ROTATE_90:
-                rotateAngle = 90;
+                rotationAngle = 90;
                 break;
             case ExifInterface.ORIENTATION_ROTATE_180:
-                rotateAngle = 180;
+                rotationAngle = 180;
                 break;
             case ExifInterface.ORIENTATION_ROTATE_270:
-                rotateAngle = 270;
+                rotationAngle = 270;
                 break;
         }
-        if (rotateAngle != 0) {
-            Matrix matrix = new Matrix();
-            matrix.postRotate(rotateAngle);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        }
-        return bitmap;
+        Matrix matrix = new Matrix();
+        matrix.setRotate(rotationAngle);
+        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        bitmap.recycle();
+        return rotatedBitmap;
     }
-
 }

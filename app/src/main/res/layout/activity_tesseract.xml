@@ -7,23 +7,61 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/OCRButtonContainer"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:clickable="true"
-        android:background="#166e78"
-        android:id="@+id/OCRButtonContainer">
+        android:background="#166e78">
 
         <TextView
             android:id="@+id/OCRTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="#fff"
             android:text="여기에 결과 출력"
-            android:textColor="#0277BD"
             android:textSize="15sp" />
 
     </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/OCRButtonContainer"
+        android:layout_above="@id/bottomButton"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_id1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="상품번호" />
+
+            <TextView
+                android:id="@+id/tv_name1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="상품명" />
+
+            <TextView
+                android:id="@+id/tv_quantity1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="수량" />
+
+            <TextView
+                android:id="@+id/tv_date1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="날짜" />
+
+        </TableRow>
+
+    </TableLayout>
 
     <Button
         android:id="@+id/bottomButton"

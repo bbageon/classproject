@@ -88,15 +88,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return inventoryItems;
     }
 
-    public void InsertInventory(Context context, int id, String name, int quantity) {
+    public void InsertInventory(int id, String name, int quantity) {
         SQLiteDatabase db = getWritableDatabase();
 
-        /*// ID 중복 시 재확인 (팝업창)
+        // ID 중복 시 재확인 (팝업창)
         InventoryItem existingItem = getInventoryItemById(id);
         if (existingItem != null) {
-            showAlertDialog(context, "이미 존재하는 ID의 상품이 있습니다.");
-            return;
-        }*/
+
+        }
 
         // 데이터를 입력한 날짜가 들어가
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -112,15 +111,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // 원하는 날짜에 데이터를 INSERT
-    public void InsertInventoryForDate(Context context, int id, String name, int quantity, String desiredDate) {
+    public void InsertInventoryForDate(int id, String name, int quantity, String desiredDate) {
         SQLiteDatabase db = getWritableDatabase();
-
-        /*// ID 중복 시 재확인 (팝업창)
-        InventoryItem existingItem = getInventoryItemById(id);
-        if (existingItem != null) {
-            showAlertDialog(context, "이미 존재하는 ID의 상품이 있습니다.");
-            return;
-        }*/
 
         Random random = new Random();
         // 0 <= 판매량(랜덤값) <= 수량
@@ -164,12 +156,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 new Object[]{id});
     }
 
-    /*// ID가 겹치면 경고문
-    private void showAlertDialog(Context context, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(message).setPositiveButton("확인", null).show();
-    }*/
-
     // "날짜 선택" 버튼 누르면 해당하는 날짜의 데이터들을 보여줌
     public ArrayList<String> getOrderItemsByDate(String date) {
         SQLiteDatabase db = getReadableDatabase();
@@ -189,4 +175,6 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return orderItems;
     }
+
+
 }

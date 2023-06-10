@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -37,6 +38,10 @@ public class tesseractActivity extends AppCompatActivity {
     private Button bottomButton;
     private TableLayout tablelayout1;
 
+    private DBHelper dbHelper;
+
+    private Button modifyBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class tesseractActivity extends AppCompatActivity {
         OCRTextView = findViewById(R.id.OCRTextView);
         bottomButton = findViewById(R.id.bottomButton);
         tablelayout1 = findViewById(R.id.tableLayout1);
+        modifyBtn = findViewById(R.id.modifyButton);
 //        btn_ocr = findViewById(R.id.ocrButton);
 
         bottomButton.setOnClickListener(new View.OnClickListener() {
@@ -92,41 +98,59 @@ public class tesseractActivity extends AppCompatActivity {
             }
         });*/
 
-        addTableRow("1", "청양고추", 2, "2023-06-05");
-        addTableRow("2", "테이팩스니트릴장갑", 2, "2023-06-05");
-        addTableRow("3", "참맛기름", 1, "2023-06-05");
-        addTableRow("4", "사시미간장", 1, "2023-06-05");
-        addTableRow("5", "쌈무", 4, "2023-06-05");
-        addTableRow("6", "일등맛김치", 1, "2023-06-05");
-        addTableRow("7", "쫄면", 8, "2023-06-05");
-        addTableRow("8", "구이용콩나물", 1, "2023-06-05");
-        addTableRow("9", "일회용성인용앞치마", 3, "2023-06-05");
-        addTableRow("10", "양파", 1, "2023-06-05");
+        addTableRow(1, "청양고추", 2, "2023-06-05");
+        addTableRow(2, "테이팩스니트릴장갑", 2, "2023-06-05");
+        addTableRow(3, "참맛기름", 1, "2023-06-05");
+        addTableRow(4, "사시미간장", 1, "2023-06-05");
+        addTableRow(5, "쌈무", 4, "2023-06-05");
+        addTableRow(6, "일등맛김치", 1, "2023-06-05");
+        addTableRow(7, "쫄면", 8, "2023-06-05");
+        addTableRow(8, "구이용콩나물", 1, "2023-06-05");
+        addTableRow(9, "일회용성인용앞치마", 3, "2023-06-05");
+        addTableRow(10, "양파", 1, "2023-06-05");
 
 
     }
 
-    private void addTableRow(String label, String value, int quantity, String date) {
+    private void addTableRow(int id, String name, int quantity, String date) {
         TableRow row = new TableRow(this);
         TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
         row.setLayoutParams(layoutParams);
 
-        TextView labelTextView = new TextView(this);
-        labelTextView.setText(label);
-        TextView valueTextView = new TextView(this);
-        valueTextView.setText(value);
-        TextView quantityTextView = new TextView(this);
-        quantityTextView.setText(Integer.toString(quantity)); // quantity 변수를 문자열로 변환하여 설정
-        TextView dateTextView = new TextView(this);
-        dateTextView.setText(date);
+        TextView idTextView = new TextView(this);
+        idTextView.setText(id);
+        EditText nameEditText = new EditText(this);
+        nameEditText.setText(name);
+        EditText quantityEditText = new EditText(this);
+        quantityEditText.setText(Integer.toString(quantity)); // quantity 변수를 문자열로 변환하여 설정
+        EditText dateEditText = new EditText(this);
+        dateEditText.setText(date);
 
-        row.addView(labelTextView);
-        row.addView(valueTextView);
-        row.addView(quantityTextView);
-        row.addView(dateTextView);
+        row.addView(idTextView);
+        row.addView(nameEditText);
+        row.addView(quantityEditText);
+        row.addView(dateEditText);
 
         tablelayout1.addView(row);
+
+        // 사용자가 값을 수정하고 버튼을 클릭할 때 호출되는 이벤트 리스너 등록
+        modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // EditText에서 수정된 값을 가져옴
+                String updatedName = nameEditText.getText().toString();
+                int updatedQuantity = Integer.parseInt(quantityEditText.getText().toString());
+                String updatedDate = dateEditText.getText().toString();
+
+                // UpdateInventory() 메소드를 호출하여 값을 업데이트
+                dbHelper.UpdateInventory(id, updatedName, updatedQuantity);
+            }
+        });
+
+        row.addView(modifyBtn);
     }
+
+
 
 
     // 이미지에서 텍스트 읽기, 텍스트 추출버튼

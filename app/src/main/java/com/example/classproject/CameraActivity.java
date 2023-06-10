@@ -162,7 +162,7 @@ public class CameraActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 if (bitmap != null) {
                     // 이미지를 회전시킵니다.
-                    bitmap = rotateImageIfRequired(bitmap, imageUri);
+                    /*bitmap = rotateImageIfRequired(bitmap, imageUri);*/
                     iv_photo.setImageBitmap(bitmap);
                 }
             } catch (IOException e) {
@@ -171,7 +171,7 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    // 이미지를 회전시키는 메서드입니다.
+    /*// 이미지를 회전시키는 메서드입니다.
     private Bitmap rotateImageIfRequired(Bitmap bitmap, Uri imageUri) throws IOException {
         InputStream input = getContentResolver().openInputStream(imageUri);
         ExifInterface exifInterface = null;
@@ -198,5 +198,5 @@ public class CameraActivity extends AppCompatActivity {
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         bitmap.recycle();
         return rotatedBitmap;
-    }
+    }*/
 }

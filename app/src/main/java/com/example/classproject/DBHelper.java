@@ -94,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // ID 중복 시 재확인 (팝업창)
         InventoryItem existingItem = getInventoryItemById(id);
         if (existingItem != null) {
-
+            return;
         }
 
         // 데이터를 입력한 날짜가 들어가
@@ -121,6 +121,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO Inventory (id, name, quantity, sales, stock, date) VALUES (?, ?, ?, ?, ?, ?)",
                 new Object[]{id, name, quantity, sales, stock, desiredDate});
+
+        InventoryItem existingItem = getInventoryItemById(id);
+        if (existingItem != null) {
+            return;
+        }
     }
 
     // UPDATE문

@@ -169,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
         headerDate.setText("날짜");
         headerRow.addView(headerDate);
 
+        tableLayout.addView(headerRow);
+
         // 각각의 상품 정보에 대해 TableRow을 생성하여 표에 추가
         for (InventoryItem item : inventoryItems) {
             TableRow tableRow = new TableRow(this);

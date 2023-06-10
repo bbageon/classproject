@@ -23,12 +23,32 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/OCRButtonContainer">
+
+        <Button
+            android:id="@+id/modifyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수정" />
+
+        <Button
+            android:id="@+id/bottomButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메인화면으로"
+            android:layout_below="@id/modifyButton" />
+
+    </RelativeLayout>
+
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/OCRButtonContainer"
-        android:layout_above="@id/bottomButton"
+        android:layout_below="@id/buttonContainer"
         android:stretchColumns="*">
 
         <TableRow
@@ -62,12 +82,5 @@
         </TableRow>
 
     </TableLayout>
-
-    <Button
-        android:id="@+id/bottomButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="메인화면으로"
-        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

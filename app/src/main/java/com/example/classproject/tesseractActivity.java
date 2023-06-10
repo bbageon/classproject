@@ -42,6 +42,10 @@ public class tesseractActivity extends AppCompatActivity {
 
     private Button modifyBtn;
 
+    private EditText nameEditText;
+    private EditText quantityEditText;
+    private EditText dateEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,10 @@ public class tesseractActivity extends AppCompatActivity {
         bottomButton = findViewById(R.id.bottomButton);
         tablelayout1 = findViewById(R.id.tableLayout1);
         modifyBtn = findViewById(R.id.modifyButton);
+
+        nameEditText = new EditText(this);
+        quantityEditText = new EditText(this);
+        dateEditText = new EditText(this);
 //        btn_ocr = findViewById(R.id.ocrButton);
 
         bottomButton.setOnClickListener(new View.OnClickListener() {
@@ -118,11 +126,11 @@ public class tesseractActivity extends AppCompatActivity {
         row.setLayoutParams(layoutParams);
 
         TextView idTextView = new TextView(this);
-        idTextView.setText(id);
+        idTextView.setText(Integer.toString(id));
         EditText nameEditText = new EditText(this);
         nameEditText.setText(name);
         EditText quantityEditText = new EditText(this);
-        quantityEditText.setText(Integer.toString(quantity)); // quantity 변수를 문자열로 변환하여 설정
+        quantityEditText.setText(Integer.toString(quantity));
         EditText dateEditText = new EditText(this);
         dateEditText.setText(date);
 
@@ -131,24 +139,24 @@ public class tesseractActivity extends AppCompatActivity {
         row.addView(quantityEditText);
         row.addView(dateEditText);
 
-        tablelayout1.addView(row);
-
         // 사용자가 값을 수정하고 버튼을 클릭할 때 호출되는 이벤트 리스너 등록
-        modifyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // EditText에서 수정된 값을 가져옴
-                String updatedName = nameEditText.getText().toString();
-                int updatedQuantity = Integer.parseInt(quantityEditText.getText().toString());
-                String updatedDate = dateEditText.getText().toString();
+//        modifyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // EditText에서 수정된 값을 가져옴
+//                String updatedName = nameEditText.getText().toString();
+//                int updatedQuantity = Integer.parseInt(quantityEditText.getText().toString());
+//                String updatedDate = dateEditText.getText().toString();
+//
+//                // UpdateInventory() 메소드를 호출하여 값을 업데이트
+//                dbHelper.UpdateInventory(id, updatedName, updatedQuantity);
+//            }
+//        });
 
-                // UpdateInventory() 메소드를 호출하여 값을 업데이트
-                dbHelper.UpdateInventory(id, updatedName, updatedQuantity);
-            }
-        });
-
-        row.addView(modifyBtn);
+        tablelayout1.addView(row);
+//        tablelayout1.addView(modifyBtn);
     }
+
 
 
 

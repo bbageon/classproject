@@ -76,7 +76,7 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        // 카메라 및 외부 저장소에 대한 권한을 확인합니다.
+        // 카메라 및 외부 저장소에 대한 권한을 확인
         if (hasCameraPermission() && hasWriteExternalStoragePermission()) {
             Log.d(TAG, "권한 설정 완료");
         } else {
@@ -134,25 +134,27 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    // 사진 촬영을 위한 카메라 앱을 실행합니다.
+    // 사진 촬영을 위한 카메라 앱을 실행
     private void takePhoto() {
         if (hasCameraPermission()) {
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.TITLE, "New Picture");
             values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera");
 
-            // 이미지가 저장될 URI를 생성합니다.
-            imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            // 이미지가 저장될 URI를 생성
+            imageUri = getContentResolver().insert
+                    (MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
         } else {
-            Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText
+                    (this, "카메라 권한 필요", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // 사진 촬영 결과를 처리합니다.
+    // 사진 촬영 결과를 처리
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

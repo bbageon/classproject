@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/grand_parent"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:id="@+id/OCRButtonContainer"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:clickable="true"
         android:background="#166e78">
 
         <TextView
@@ -24,63 +24,71 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/OCRButtonContainer"
+        android:id="@+id/tableContainer">
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_id1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="상품번호" />
+
+                <TextView
+                    android:id="@+id/tv_name1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="상품명" />
+
+                <TextView
+                    android:id="@+id/tv_quantity1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="수량" />
+
+                <TextView
+                    android:id="@+id/tv_date1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="날짜" />
+
+            </TableRow>
+
+        </TableLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/OCRButtonContainer">
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/modifyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="수정" />
+            android:text="수정"
+            android:visibility="gone"
+            android:clickable="false"/>
 
         <Button
             android:id="@+id/bottomButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="메인화면으로"
+            android:text="수정"
             android:layout_below="@id/modifyButton" />
 
     </RelativeLayout>
-
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonContainer"
-        android:stretchColumns="*">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_id1"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="상품번호" />
-
-            <TextView
-                android:id="@+id/tv_name1"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="상품명" />
-
-            <TextView
-                android:id="@+id/tv_quantity1"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="수량" />
-
-            <TextView
-                android:id="@+id/tv_date1"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="날짜" />
-
-        </TableRow>
-
-    </TableLayout>
 
 </RelativeLayout>

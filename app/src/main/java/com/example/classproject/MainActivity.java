@@ -83,31 +83,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 데이터베이스에 새로운 데이터 삽입 예시
-        dbHelper.InsertInventory(1, "청량고추", 50);
-        dbHelper.InsertInventory(2, "테이팩스니트릴장갑", 100);
-        dbHelper.InsertInventory(3,"참맛기름", 150);
-        dbHelper.InsertInventory(4,"사시미간장", 200);
-        dbHelper.InsertInventory(5,"쌈무", 250);
-        dbHelper.InsertInventory(6,"일등맛김치", 300);
-        dbHelper.InsertInventory(7,"쫄면", 350);
-        dbHelper.InsertInventory(8,"구이용콩나물", 400);
-        dbHelper.InsertInventory(9,"일회용성인용앞치마", 450);
-        dbHelper.InsertInventory(10,"양파", 500);
+        /*dbHelper.InsertInventory(1, "청량고추", 10);
+        dbHelper.InsertInventory(2, "테이팩스니트릴장갑", 15);
+        dbHelper.InsertInventory(3,"참맛기름", 20);
+        dbHelper.InsertInventory(4,"사시미간장", 25);
+        dbHelper.InsertInventory(5,"쌈무", 30);
+        dbHelper.InsertInventory(6,"일등맛김치", 35);
+        dbHelper.InsertInventory(7,"쫄면", 40);
+        dbHelper.InsertInventory(8,"구이용콩나물", 45);
+        dbHelper.InsertInventory(9,"일회용성인용앞치마", 50);
+        dbHelper.InsertInventory(10,"양파", 55);
 
-        /*dbHelper.InsertInventoryForDate(11, "test1", 10, "2023-06-05");
-        dbHelper.InsertInventoryForDate(12, "소단단두부", 10, "2023-06-05");
-        dbHelper.InsertInventoryForDate(13, "하늘그린 큐티물티", 20, "2023-06-05");
-        dbHelper.InsertInventoryForDate(14, "다진마늘", 30, "2023-06-05");
-        dbHelper.InsertInventoryForDate(15, "다목적수세미", 40, "2023-06-05");
-        dbHelper.InsertInventoryForDate(16, "키친아트철수세미", 50, "2023-06-05");
+        dbHelper.InsertInventoryForDate(11, "환타", 10, "2023-06-05");
+        dbHelper.InsertInventoryForDate(12, "소단단두부", 20, "2023-06-05");
+        dbHelper.InsertInventoryForDate(13, "하늘그린 큐티물티", 30, "2023-06-05");
+        dbHelper.InsertInventoryForDate(14, "다진마늘", 40, "2023-06-05");
+        dbHelper.InsertInventoryForDate(15, "다목적수세미", 50, "2023-06-05");
+        dbHelper.InsertInventoryForDate(16, "키친아트철수세미", 60, "2023-06-05");
 
-        dbHelper.InsertInventoryForDate(17, "만능김가루", 60, "2023-06-01");
-        dbHelper.InsertInventoryForDate(18, "깐마늘", 70, "2023-06-01");
-        dbHelper.InsertInventoryForDate(19, "도깨비폼", 80, "2023-06-01");
-        dbHelper.InsertInventoryForDate(20, "크린장갑", 90, "2023-06-01");
-        dbHelper.InsertInventoryForDate(21, "참기름", 100, "2023-06-01");
-        dbHelper.InsertInventoryForDate(22, "파채", 110, "2023-06-01");
-        dbHelper.InsertInventoryForDate(23, "명이나물", 120, "2023-06-01");*/
+        dbHelper.InsertInventoryForDate(17, "만능김가루", 100, "2023-06-01");
+        dbHelper.InsertInventoryForDate(18, "깐마늘", 150, "2023-06-01");
+        dbHelper.InsertInventoryForDate(19, "도깨비폼", 200, "2023-06-01");
+        dbHelper.InsertInventoryForDate(20, "크린장갑", 250, "2023-06-01");
+        dbHelper.InsertInventoryForDate(21, "참기름", 300, "2023-06-01");
+        dbHelper.InsertInventoryForDate(22, "파채", 350, "2023-06-01");
+        dbHelper.InsertInventoryForDate(23, "명이나물", 400, "2023-06-01");*/
 
         /*dbHelper.DeleteInventory(1);
         dbHelper.DeleteInventory(2);

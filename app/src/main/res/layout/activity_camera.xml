@@ -30,15 +30,15 @@
         android:background="@android:color/transparent"
         android:textColor="#FFFFFF" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:text="Loading..."
         android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="16dp" />
-    <TextView
+        android:textSize="16dp" />-->
+    <!--<TextView
         android:id="@+id/loadingTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="16dp"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
 
 </LinearLayout>

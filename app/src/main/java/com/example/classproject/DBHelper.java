@@ -114,6 +114,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public void InsertInventoryForDate(int id, String name, int quantity, String desiredDate) {
         SQLiteDatabase db = getWritableDatabase();
 
+        InventoryItem existingItem = getInventoryItemById(id);
+        if (existingItem != null) {
+            return;
+        }
+
         Random random = new Random();
         // 0 <= 판매량(랜덤값) <= 수량
         int sales = random.nextInt( quantity + 1);
@@ -122,10 +127,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Inventory (id, name, quantity, sales, stock, date) VALUES (?, ?, ?, ?, ?, ?)",
                 new Object[]{id, name, quantity, sales, stock, desiredDate});
 
-        InventoryItem existingItem = getInventoryItemById(id);
-        if (existingItem != null) {
-            return;
-        }
     }
 
     // UPDATE문

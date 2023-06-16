@@ -31,12 +31,13 @@ public class CameraActivity extends AppCompatActivity {
     private static final String TAG = "tag";
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
+
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 3;
 
     private Button btn_photo;
     private ImageView iv_photo;
     private Uri imageUri;
-    ProgressDialog customProgressDialog;
+    private ProgressDialog customProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class CameraActivity extends AppCompatActivity {
 
                 // 데이터베이스 업데이트 작업 수행
                 DBHelper dbHelper = new DBHelper(CameraActivity.this);
+
                 dbHelper.UpdateInventory(1, "청량고추", 2);
                 dbHelper.UpdateInventory(2, "테이팩스니트릴장갑", 1);
                 dbHelper.UpdateInventory(3, "참맛기름", 1);
@@ -101,24 +103,24 @@ public class CameraActivity extends AppCompatActivity {
         });
     }
 
-    // 카메라 권한이 있는지 확인합니다.
+    // 카메라 권한이 있는지 확인
     private boolean hasCameraPermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
     }
 
-    // 외부 저장소 쓰기 권한이 있는지 확인합니다.
+    // 외부 저장소 쓰기 권한이 있는지 확인
     private boolean hasWriteExternalStoragePermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
-    // 카메라 및 외부 저장소 권한을 요청합니다.
+    // 카메라 및 외부 저장소 권한을 요청
     private void requestPermissions() {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_CAMERA_PERMISSION);
     }
 
-    // 권한 요청 결과를 처리합니다.
+    // 권한 요청 결과를 처리
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -160,10 +162,10 @@ public class CameraActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             try {
-                // URI에서 이미지 비트맵을 가져옵니다.
+                // URI에서 이미지 비트맵을 가져옴
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 if (bitmap != null) {
-                    // 이미지를 회전시킵니다.
+                    // 이미지를 회전
                     bitmap = rotateImageIfRequired(bitmap, imageUri);
                     iv_photo.setImageBitmap(bitmap);
                 }
@@ -173,7 +175,7 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    // 이미지를 회전시키는 메서드입니다.
+    // 이미지를 회전시키는 메서드
     private Bitmap rotateImageIfRequired(Bitmap bitmap, Uri imageUri) throws IOException {
         InputStream input = getContentResolver().openInputStream(imageUri);
         ExifInterface exifInterface = null;

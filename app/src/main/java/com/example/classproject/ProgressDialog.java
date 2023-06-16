@@ -7,7 +7,7 @@ import android.view.Window;
 public class ProgressDialog extends Dialog {
     public ProgressDialog(Context context) {
         super(context);
-        // 다이얼 로그 제목을 안보이게...
+        // 다이얼 로그 제목을 안보이게 함
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_progress);
     }

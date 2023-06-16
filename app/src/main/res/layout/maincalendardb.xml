@@ -67,7 +67,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!--미구현-->
         <Button
             android:id="@+id/next1Button"
             android:layout_width="0dp"

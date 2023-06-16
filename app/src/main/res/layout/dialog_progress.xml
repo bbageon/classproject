@@ -6,10 +6,12 @@
     android:orientation="vertical"
     android:padding="6dp"
     android:background="@drawable/progress_bg" >
+
     <ProgressBar
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:indeterminateDrawable="@drawable/progress_image" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,4 +20,5 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="16dp" />
+
 </LinearLayout>

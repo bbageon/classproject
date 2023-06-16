@@ -91,13 +91,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public void InsertInventory(int id, String name, int quantity) {
         SQLiteDatabase db = getWritableDatabase();
 
-        // ID 중복 시 재확인 (팝업창)
+        // ID 중복 시 재확인
         InventoryItem existingItem = getInventoryItemById(id);
         if (existingItem != null) {
             return;
         }
 
-        // 데이터를 입력한 날짜가 들어가
+        // 데이터를 입력한 날짜가 들어가게 함
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateFormat.format(new Date());
 

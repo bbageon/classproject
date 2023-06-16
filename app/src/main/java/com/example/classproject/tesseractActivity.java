@@ -31,7 +31,7 @@ import java.io.OutputStream;
 public class tesseractActivity extends AppCompatActivity {
 
     Bitmap image; //사용되는이미지
-    /*private TessBaseAPI mTess;*/  //Tess API 참조
+    private TessBaseAPI mTess;  //Tess API 참조
     String datapath =""; // 언어데이터 경로
     TextView OCRTextView; // OCR 결과뷰
     Button btn_ocr;
@@ -60,7 +60,7 @@ public class tesseractActivity extends AppCompatActivity {
         nameEditText = new EditText(this);
         quantityEditText = new EditText(this);
         dateEditText = new EditText(this);
-//        btn_ocr = findViewById(R.id.ocrButton);
+        /*btn_ocr = findViewById(R.id.ocrButton);*/
 
         bottomButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +69,6 @@ public class tesseractActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        // 이미지 디코딩을 위한 초기화(Resource 폴더에 저장한 샘플 그림파일을 bitmap 으로 만들어 리턴)
-        /*image = BitmapFactory.decodeResource(getResources(), R.drawable.sample_kor);*/
 
         // 언어파일 경로, getfilesdir() : 일반 파일들의 저장 경로 반환
         datapath = getFilesDir()+ "/tesseract/";
@@ -85,11 +82,11 @@ public class tesseractActivity extends AppCompatActivity {
         String lang = "kor+eng";
 
         // OCR 세팅
-        /*mTess = new TessBaseAPI();
-        mTess.init(datapath, lang);*/
+        mTess = new TessBaseAPI();
+        mTess.init(datapath, lang);
 
         //텍스트 추출 버튼
-        /*btn_ocr.setOnClickListener(new View.OnClickListener() {
+        btn_ocr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 이미지를 가져와 비트맵으로 변환
@@ -104,7 +101,7 @@ public class tesseractActivity extends AppCompatActivity {
                 TextView OCRTextView = (TextView) findViewById(R.id.OCRTextView);
                 OCRTextView.setText(OCRResult);
             }
-        });*/
+        });
 
         addTableRow(1, "청양고추", 2, "2023-06-05");
         addTableRow(2, "테이팩스니트릴장갑", 2, "2023-06-05");
@@ -140,31 +137,24 @@ public class tesseractActivity extends AppCompatActivity {
         row.addView(dateEditText);
 
         // 사용자가 값을 수정하고 버튼을 클릭할 때 호출되는 이벤트 리스너 등록
-//        modifyBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // EditText에서 수정된 값을 가져옴
-//                String updatedName = nameEditText.getText().toString();
-//                int updatedQuantity = Integer.parseInt(quantityEditText.getText().toString());
-//                String updatedDate = dateEditText.getText().toString();
-//
-//                // UpdateInventory() 메소드를 호출하여 값을 업데이트
-//                dbHelper.UpdateInventory(id, updatedName, updatedQuantity);
-//            }
-//        });
+        modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // EditText에서 수정된 값을 가져옴
+                String updatedName = nameEditText.getText().toString();
+                int updatedQuantity = Integer.parseInt(quantityEditText.getText().toString());
+                String updatedDate = dateEditText.getText().toString();
+
+                // UpdateInventory() 메소드를 호출하여 값을 업데이트
+                dbHelper.UpdateInventory(id, updatedName, updatedQuantity);
+            }
+        });
 
         tablelayout1.addView(row);
-//        tablelayout1.addView(modifyBtn);
+        tablelayout1.addView(modifyBtn);
     }
 
-
-
-
-
     // 이미지에서 텍스트 읽기, 텍스트 추출버튼
-
-
-
     private void checkFile(File dir, String lang) {
         // dir 없으면 dir 먼저생성하고 파일 생성
         if (!dir.exists()&& dir.mkdirs()) {
